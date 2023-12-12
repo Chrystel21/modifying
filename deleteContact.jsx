@@ -21,20 +21,18 @@ const DeleteModal = ({ contact, isOpen, onClose, onDelete, id }) => {
     <Modal open={isOpen} onClose={onClose}>
       <div className='modal-container'>
         <Typography variant='h6'> Confirm Deletion </Typography>
-        <Typography>Are you sure you want to delete this contact?</Typography>
-        <Typography>ID: {id}</Typography>
-        <Typography>Full Name: {contact?.fullName}</Typography>
-        <Typography>Email: {contact?.emailAddress}</Typography>
-        <Typography>Contact Number: {contact?.contactNumber}</Typography>
-        <Typography>Location: {contact?.location}</Typography>
-        <Typography>Registered Date: {contact?.registeredDate}</Typography>
+        <Typography>
+          Are you sure you want to delete the record with ID: {id}?
+        </Typography>
 
-        <Button onClick={onClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleConfirmDelete} color="primary">
-          Confirm Delete
-        </Button>
+        <DialogActions>
+          <Button onClick={onClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleConfirmDelete} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
       </div>
     </Modal>
   );
@@ -53,11 +51,7 @@ const DeleteContact = ({ contact, isOpen, onClose, onDelete, id }) => {
           id={id}
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Back
-        </Button>
-      </DialogActions>
+      {/* DialogActions removed from here */}
     </Dialog>
   );
 };
