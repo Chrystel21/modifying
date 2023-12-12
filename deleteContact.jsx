@@ -1,28 +1,65 @@
+// DeleteModal.jsx
 import React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import {
+  Modal,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
+import './styles.css';
 
-const deleteContact = ({ onDeleteContact, onClose, open }) => {
-  const handleDeleteContact = () => {
-    onDeleteContact();
+const DeleteModal = ({ contact, isOpen, onClose, onDelete, id }) => {
+  const handleConfirmDelete = () => {
+    onDelete();
     onClose();
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Confirm Deletion</DialogTitle>
+    <Modal open={isOpen} onClose={onClose}>
+      <div className='modal-container'>
+        <Typography variant='h6'> Confirm Deletion </Typography>
+        <Typography>Are you sure you want to delete this contact?</Typography>
+        <Typography>ID: {id}</Typography>
+        <Typography>Full Name: {contact?.fullName}</Typography>
+        <Typography>Email: {contact?.emailAddress}</Typography>
+        <Typography>Contact Number: {contact?.contactNumber}</Typography>
+        <Typography>Location: {contact?.location}</Typography>
+        <Typography>Registered Date: {contact?.registeredDate}</Typography>
+
+        <Button onClick={onClose} color="primary">
+          Cancel
+        </Button>
+        <Button onClick={handleConfirmDelete} color="primary">
+          Confirm Delete
+        </Button>
+      </div>
+    </Modal>
+  );
+};
+
+const DeleteContact = ({ contact, isOpen, onClose, onDelete, id }) => {
+  return (
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle> Delete Contact Details </DialogTitle>
       <DialogContent>
-        Are you sure you want to delete the record?
+        <DeleteModal
+          contact={contact}
+          isOpen={isOpen}
+          onClose={onClose}
+          onDelete={onDelete}
+          id={id}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          No
-        </Button>
-        <Button onClick={handleDeleteContact} color="primary">
-          Yes
+          Back
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default deleteContact;
+export default DeleteContact;
