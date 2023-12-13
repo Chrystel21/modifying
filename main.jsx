@@ -1,14 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './styles.css'; // Make sure to import your custom styles here
+import ContactForm from './ContactForm';
+import ContactTable from './ContactTable';
 
 const Main = () => {
   return (
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <div className="container">
+      <div className="form-container">
+        <ContactForm />
+      </div>
+      <div className="table-container">
+        <ContactTable />
+      </div>
+    </div>
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Main />);
+export default Main;
