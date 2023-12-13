@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Button,
-  TablePagination,
-} from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, TablePagination } from '@mui/material';
+import { Link, useHistory } from 'react-router-dom';
 import ContactForm from './ContactForm';
 
 const ContactTable = ({ onUpdatedContact }) => {
@@ -26,7 +16,7 @@ const ContactTable = ({ onUpdatedContact }) => {
 
   const handleAddContact = (newContact) => {
     setContacts([...contacts, newContact]);
-    history.push('/');
+    // No need to use history.push('/') after adding a contact
   };
 
   const handleViewContact = (contactId) => {
@@ -80,9 +70,15 @@ const ContactTable = ({ onUpdatedContact }) => {
                 <TableCell>{contact.location}</TableCell>
                 <TableCell>{contact.registeredDate}</TableCell>
                 <TableCell>
-                  <Button onClick={() => handleViewContact(contact.id)}>View</Button>
-                  <Button onClick={() => handleUpdateContact(contact.id)}>Update</Button>
-                  <Button onClick={() => handleDeleteContact(contact.id)}>Delete</Button>
+                  <Link to={`/view/${contact.id}`}>
+                    <Button>View</Button>
+                  </Link>
+                  <Link to={`/update/${contact.id}`}>
+                    <Button>Update</Button>
+                  </Link>
+                  <Link to={`/delete/${contact.id}`}>
+                    <Button>Delete</Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
